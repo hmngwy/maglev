@@ -83,7 +83,7 @@ apply_theme() {
 
     # messages
     message_fg=colour16           # black
-    message_bg=colour11 # yellow
+    message_bg=colour244 # yellow
     message_attr=bold
     tmux set -g message-style fg=$message_fg,bg=$message_bg,$message_attr
 
@@ -99,7 +99,7 @@ apply_theme() {
 
     # status line
     status_fg=colour253 # white
-    status_bg=colour0 # dark gray
+    status_bg=colour234 # dark gray
     tmux set -g status-style fg=$status_fg,bg=$status_bg
 
     session_fg=colour16  # black
@@ -110,20 +110,20 @@ apply_theme() {
     fi
     tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
-    window_status_fg=colour8 # gray
-    window_status_bg=colour0 # dark gray
-    window_status_format="#I #W"
+    window_status_fg=colour4 # gray
+    window_status_bg=colour234 # dark gray
+    window_status_format="#[fg=$window_status_current_fg,bg=$window_status_current_bg,bold] #I : #W #F #[fg=colour237,bold] $left_separator"
     tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
 
     window_status_current_fg=colour16 # black
     window_status_current_bg=colour4 # blue
-    window_status_current_format="#[fg=$window_status_bg,bg=$window_status_current_bg]$left_separator_black#[fg=$window_status_current_fg,bg=$window_status_current_bg,bold] #I $left_separator #W #[fg=$window_status_current_bg,bg=$status_bg,nobold]$left_separator_black"
+    window_status_current_format="#[fg=$window_status_bg,bg=$window_status_current_bg]$left_separator_black#[fg=$window_status_current_fg,bg=$window_status_current_bg,bold] #I $left_separator #W #F #[fg=$window_status_current_bg,bg=$status_bg,nobold]$left_separator_black"
     tmux setw -g window-status-current-format "$window_status_current_format"
     tmux set -g status-justify left
 
-    window_status_activity_fg=default
+    window_status_activity_fg=colour220
     window_status_activity_bg=default
-    window_status_activity_attr=underscore
+    window_status_activity_attr=default
     tmux setw -g window-status-activity-style fg=$window_status_activity_fg,bg=$window_status_activity_bg,$window_status_activity_attr
 
     window_status_bell_fg=colour11 # yellow
@@ -131,28 +131,28 @@ apply_theme() {
     window_status_bell_attr=blink,bold
     tmux setw -g window-status-bell-style fg=$window_status_bell_fg,bg=$window_status_bell_bg,$window_status_bell_attr
 
-    window_status_last_fg=colour4 # blue
+    window_status_last_fg=colour150 # blue
     window_status_last_attr=default
     tmux setw -g window-status-last-style $window_status_last_attr,fg=$window_status_last_fg
 
-    battery_full_fg=colour160   # red
-    battery_empty_fg=colour254  # white
-    battery_bg=colour160        # black
-    time_date_fg=colour8      # gray
-    time_date_bg=colour0 # dark gray
+    battery_full_fg=colour244   # red
+    battery_empty_fg=colour160  # white
+    battery_bg=colour244        # black
+    time_date_fg=colour244      # gray
+    time_date_bg=colour234 # dark gray
     whoami_fg=colour254         # white
     whoami_bg=colour160         # red
     host_fg=colour16            # black
     host_bg=colour254           # white
-    status_right="︎#[fg=$time_date_fg,nobold]#{prefix_highlight} $right_separator %R $right_separator %a %d %b #[fg=$host_bg]"
+    status_right="︎#[fg=$time_date_fg,nobold]#{prefix_highlight} $right_separator %R $right_separator %a %d %b"
 
     # Only show solid separator if CPU or Battery are to be displayed
     if [ "$SHOW_BATTERY" = true ] || [ "$SHOW_CPU" = true ]; then
-        status_right="$status_right $right_separator_black#[fg=$host_fg,bg=$host_bg,bold]"
+        status_right="$status_right $right_separator_black#[fg=$host_fg,bg=$battery_bg,bold]"
     fi
 
     if [ "$SHOW_BATTERY" = true ]; then
-        status_right="$status_right #{battery_icon} #{battery_percentage}"
+        status_right="$status_right #{battery_percentage}"
     fi
 
     # Only add intermediate separator if both CPU and Batter are to be displayed
