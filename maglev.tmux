@@ -98,8 +98,8 @@ apply_theme() {
     tmux setw -g mode-style fg=$mode_fg,bg=$mode_bg,$mode_attr
 
     # status line
-    status_fg=colour253 # white
-    status_bg=colour234 # dark gray
+    status_fg=colour244 # white
+    status_bg=colour235 # dark gray
     tmux set -g status-style fg=$status_fg,bg=$status_bg
 
     session_fg=colour16  # black
@@ -111,7 +111,7 @@ apply_theme() {
     tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
     window_status_fg=colour4 # gray
-    window_status_bg=colour234 # dark gray
+    window_status_bg=colour235 # dark gray
     window_status_format="#[fg=$window_status_current_fg,bg=$window_status_current_bg,bold] #I : #W #F #[fg=colour237,bold] $left_separator"
     tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
 
@@ -139,7 +139,7 @@ apply_theme() {
     battery_empty_fg=colour160  # white
     battery_bg=colour244        # black
     time_date_fg=colour244      # gray
-    time_date_bg=colour234 # dark gray
+    time_date_bg=colour235 # dark gray
     whoami_fg=colour254         # white
     whoami_bg=colour160         # red
     host_fg=colour16            # black
@@ -164,7 +164,7 @@ apply_theme() {
         status_right="$status_right CPU #{cpu_percentage} "
     fi
 
-    tmux set -g status-right-length 64 \; set -g status-right "$status_right"
+    tmux set -g status-right-length 65 \; set -g status-right "$status_right"
 
     # clock
     clock_mode_colour=colour4 # blue
